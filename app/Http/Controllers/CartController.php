@@ -23,7 +23,7 @@ class CartController extends Controller
         $this->cart = new CartCollection();
     }
     /*
-     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     *  Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
      */
     public function index(Request $request)
     {
