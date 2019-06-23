@@ -6,7 +6,10 @@ use App\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
-{
+{   /*
+    * This Function to Get User data that contain name, username, and password
+    and to send that data to page view
+    */
     public function index(Request $request)
     {
         $editableUser = null;
@@ -18,7 +21,9 @@ class UsersController extends Controller
 
         return view('users.index', compact('users', 'editableUser'));
     }
-
+    /*
+     * This Function to Store User data that contain name, username, and password
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -41,7 +46,9 @@ class UsersController extends Controller
 
         return redirect()->route('users.index');
     }
-
+    /*
+     * This Function to Update User data that contain name, username, and password
+     */
     public function update(Request $request, $userId)
     {
         $this->validate($request, [
@@ -61,7 +68,9 @@ class UsersController extends Controller
 
         return redirect()->route('users.index');
     }
-
+    /*
+     * This Function to Destroy User data that contain name, username, and password
+     */
     public function destroy(Request $request, User $user)
     {
         $this->validate($request, [
