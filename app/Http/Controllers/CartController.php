@@ -10,14 +10,21 @@ use App\Cart\CartCollection;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
-{
+{   
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     private $cart;
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function __construct()
     {
         $this->cart = new CartCollection();
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function index(Request $request)
     {
         $queriedProducts = [];
@@ -25,7 +32,9 @@ class CartController extends Controller
 
         return view('cart.index', compact('draft', 'queriedProducts'));
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function show(Request $request, $draftKey)
     {
         $draft = $this->cart->get($draftKey);
@@ -45,7 +54,9 @@ class CartController extends Controller
 
         return view('cart.index', compact('draft', 'queriedProducts'));
     }
-
+    /*
+     * Fungsi ini untuk menambahkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function add(Request $request)
     {
         if ($request->has('create-cash-draft')) {
@@ -56,7 +67,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.show', $this->cart->content()->last()->draftKey);
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function addDraftItem(Request $request, $draftKey, Product $product)
     {
         $item = new Item($product, $request->qty);
@@ -73,28 +86,36 @@ class CartController extends Controller
 
         return back();
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function updateDraftItem(Request $request, $draftKey)
     {
         $this->cart->updateDraftItem($draftKey, $request->item_key, $request->only('qty', 'item_discount'));
 
         return back();
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function removeDraftItem(Request $request, $draftKey)
     {
         $this->cart->removeItemFromDraft($draftKey, $request->item_index);
 
         return back();
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function empty($draftKey)
     {
         $this->cart->emptyDraft($draftKey);
 
         return redirect()->route('cart.index', $draftKey);
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function remove(Request $request)
     {
         $this->cart->removeDraft($request->draft_key);
@@ -107,7 +128,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.show', $lastDraft->draftKey);
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function destroy()
     {
         $this->cart->destroy();
@@ -115,7 +138,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
     }
-
+    /*
+     * Fungsi ini untuk menampilkan konten/isi data dari cart (keranjang belanja) user
+     */
     public function proccess(Request $request, $draftKey)
     {
         $this->validate($request, [
@@ -140,7 +165,9 @@ class CartController extends Controller
 
         return redirect()->route('cart.show', [$draftKey, 'action' => 'confirm']);
     }
-
+    /*
+     * Fungsi ini untuk menstor konten/isi data dari cart (keranjang belanja) user
+     */
     public function store(Request $request, $draftKey)
     {
         $draft = $this->cart->get($draftKey);
